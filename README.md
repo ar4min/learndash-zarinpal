@@ -1,12 +1,14 @@
-# learndash-zarinpal
-افزونه پرداخت آنلاین زرین پال برای LearnDash
+LearnDash For Zarinpal
 
-ویژگی های پلاگین پرداخت زرین پال برای لرن دش:
+Zarinpal payment gateway with LearnDash.
 
-نصب و فعالسازی راحت ادغام کامل لرن دش با زرین پال نمایش تراکنش های موفق صورت گرفته استفاده از سه واحد پولی ریال ، تومان و هزار تومان امکان تنظیم صفحه بازگشتی پس از پرداخت امنیت بالا در تراکنش های کاربران
+How To Install ?
+1-First install the plugin
+2-Go to LernDash settings. Enter the admin email in the PayPal payment gateway tab
+3-Then go to the "Zarrinpal Settings" tab in the LernDash settings. Enter the 36-digit port code along with the link to the return page of the payment
+4-Go to the relevant course page and scroll through the "Settings" tab of the course to reach the "Access Level" section. You can set the access plan to lifetime access and set a price for the course. Be sure to enter the unit "Toman" or "Rial" or "Thousand Toman" with a space after it
+5-Save the settings
 
-نحوه نصب پلاگین:
+The installation and activation of the LearnDash plugin is complete and you can use this payment plugin on your site
 
-ابتدا پلاگین را نصب نمایید به تنظیمات لرن دش بروید. در تب درگاه پرداخت پی پال، ایمیل مدیر را وارد نمایید سپس در تنظیمات لرن دش به تب “تنظیمات زرین‌پال” بروید. کد درگاه 36 رقمی درگاه به همراه لینک صفحه بازگشتی از پرداخت را وارد نمایید به صفحه دوره مربوطه مراجعه کرده و در تب “تنظیمات” دوره اسکرول کنید تا به بخش “سطح دسترسی” برسید. میتوانید پلن دسترسی را بر روی دسترسی مادام‌العمر قرار دهید و یک قیمت برای دوره تعیین کنید. دقت کنید که واحد “تومان” یا “ریال” یا “هزار تومان” را با یک فاصله پس از آن وارد نمایید تنظیمات را ذخیره نمایید
 
-نصب و فعالسازی افزونه LearnDash به اتمام رسید و شما میتوانید از این افزونه پرداخت در سایت خود استفاده کنید
