@@ -5,7 +5,7 @@
  * Description: Zarinpal payment gateway with LearnDash. 
  * Version: 1.0
  * Author: Armin Zahedi
- * Author URI: https://www.zarinpal.com/
+ * Author URI: http://ar4min.ir/
  * Text Domain: learndash-for-zarinpal
  * Domain Path: languages
  */
