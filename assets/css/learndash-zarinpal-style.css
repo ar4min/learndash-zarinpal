@@ -1,0 +1,34 @@
+.ld-currency{
+   display: none;
+}
+.learndash-error {
+	color: red;
+	font-weight: bold;
+}
+.learndash-success {
+	color: green;
+	font-weight: bold;
+}
+
+.checkout-dropdown-button .learndash_checkout_button .btn-join {
+    background-color: #fff !important;
+    color: #000 !important; 
+    font-weight: normal !important;
+    font-size: 16px !important;
+}
+
+.checkout-dropdown-button .learndash_checkout_button .btn-join:hover {
+    background-color: #F5F5F5 !important;
+    color: #000 !important;
+}
+
+/* Style for the dropdown menu Stripe button */
+.checkout-dropdown-button .learndash-stripe-checkout-button {
+	border: 0px;
+	border-radius: 0 !important;
+    display: inline-block;
+    font-size: 14px !important;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}

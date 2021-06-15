@@ -1,0 +1,18 @@
+.rtl .sfwd_input {
+    clear: right;
+}
+.rtl .sfwd_option_label {
+    float: right;
+}
+.rtl .sfwd_help_text_link {
+    text-align: right;
+}
+.rtl .sfwd_option_input {
+    float: right;
+}
+.rtl .sfwd_help_text {
+    float: right;
+    clear: right;
+    margin-left: 30px;
+    margin-right: 0;
+}
