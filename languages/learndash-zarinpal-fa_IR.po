@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LearnDash LMS - Zarinpal Integration\n"
-"POT-Creation-Date: 2020-07-29 19:49+0430\n"
-"PO-Revision-Date: 2020-11-18 02:15+0330\n"
-"Last-Translator: Masoud Salehi\n"
-"Language-Team: Masoud Salehi <info@nagatheme.com>\n"
+"POT-Creation-Date: 2020-03-25 19:49+0430\n"
+"PO-Revision-Date: 2020-05-18 02:15+0330\n"
+"Last-Translator: Armin Zahedi\n"
+"Language-Team: Armin Zahedi\n"
 "Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,92 +20,6 @@ msgstr ""
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:105
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:106
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:262
-msgid "Register version"
-msgstr "مجوز زرین‌پال لرن‌دش"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:264
-msgid ""
-"You already register your license key. to re validate it, you can use this form."
-msgstr ""
-"شما قبلاً کلید مجوز خود را فعال کرده‌اید. می‌توانید با استفاده از این فرم، اعتبار آن "
-"را مجدداً تأیید نمائید."
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:266
-msgid "Your current license:"
-msgstr "مجوز فعلی شما:"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:278
-msgid "Revalidate"
-msgstr "تأیید اعتبار مجدد"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:279
-msgid "Delete and submit another license"
-msgstr "حذف و ثبت یک مجوز دیگر"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:283
-msgid "New license key"
-msgstr "کلید مجوز جدید"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:284
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:301
-msgid "Register License"
-msgstr "ثبت مجوز"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:286
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:292
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:303
-msgid "Please wait..."
-msgstr "لطفاً شکیبا باشید..."
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:298
-msgid "Please activate plugin with your license key to all features work."
-msgstr "لطفاً مجوز افزونه را ثبت نمائید تا همۀ تنظیمات و قابلیت‌های افزونه فعال شوند."
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:300
-msgid "License key"
-msgstr "کلید مجوز"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:332
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:364
-msgid "Something goes wrong please try again."
-msgstr "خطایی رخ داده است. لطفاً دوباره تلاش کنید."
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:393
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:461
-msgid "Please insert your license code"
-msgstr "لطفاً کد مجوز خود را وارد کنید"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:409
-msgid "License code is valid."
-msgstr "کد مجوز شما معتبر است."
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:413
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:475
-msgid "Thanks! Your license activated successfully."
-msgstr "هووورا! کلید مجوز شما با موفقیت فعال شد."
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:440
-#, php-format
-msgid "To activating your %s please insert you license key"
-msgstr ""
-"لطفاً کلید مجوز افزونه \"%s\" خود را ثبت نمائید تا همۀ تنظیمات افزونه فعال شوند"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:441
-msgid "Register Now"
-msgstr "همین الان ثبت نمائید"
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:447
-#, php-format
-msgid "There is something wrong with your %s license. please check it."
-msgstr "برای مجوز %s شما خطایی رخ داده است. لطفاً بررسی نمائید."
-
-#: includes/admin/settings/class-ld-zarinpal-zhkg.php:448
-msgid "Check Now"
-msgstr "همین الان بررسی نمائید"
 
 #: includes/admin/settings/class-settings.php:54
 msgid ""
@@ -201,8 +115,8 @@ msgstr "درگاه پرداخت امن زرین‌پال را به افزونه 
 
 #. Author of the plugin/theme
 msgid "NagaTheme, Reza Ebrahimi"
-msgstr "ناگاتم، رضا ابراهیمی"
+msgstr "آرمین زاهدی , زرین پال"
 
 #. Author URI of the plugin/theme
-msgid "http://www.learndash.com/"
-msgstr "https://www.zhaket.com/store/web/nagatheme/"
+msgid "http://www.zarinpal.com/"
+msgstr "https://www.ar4min.ir/"
