@@ -110,9 +110,9 @@ class LearnDash_Zarinpal_Legacy_Checkout_Integration {
             $course_price = str_replace("هزار","",$course_price);
             
             if(is_numeric(strpos($course_price_copy,'ریال'))){
-	          $course_price = $course_price / 10;
+	          $course_price = $course_price;
             }else if(is_numeric(strpos($course_price_copy,'تومان'))){
-	          $course_price = $course_price ;
+	          $course_price = $course_price * 10 ;
             }else if(is_numeric(strpos($course_price_copy,'هزار تومان'))){
 	          $course_price = $course_price * 1000 ;
             }else{
@@ -127,19 +127,19 @@ class LearnDash_Zarinpal_Legacy_Checkout_Integration {
 	   	    
 	   	    if (isset($_REQUEST['Status'],$_REQUEST['Authority'])){
 			  if (strtoupper($_REQUEST['Status']) == 'OK'){
-			    $data = array('MerchantID' => $this->MerchantID, 'Authority' => $_REQUEST['Authority'], 'Amount' => intval($course_price));
-                $result = $this->SendRequest_ToZarinPal('PaymentVerification', json_encode($data));
+			    $data = array('merchant_id' => $this->MerchantID, 'authority' => $_REQUEST['Authority'], 'amount' => intval($course_price));
+                $result = $this->SendRequest_ToZarinPal('verify', json_encode($data));
     	        if ($result === false) {
     	            $_SESSION['sfwd-lms-tx'] = 'پرداخت لغو شد';
     	            $sfwd_lms_tx = 'پرداخت لغو شد';
     	        }else {
-                  if ($result["Status"] == 100) {
-                    $this->zarinpal_learndash_payment_complete('ZarinPal',ltrim($_REQUEST['Authority'], 0),$result["RefID"]);
-					$_SESSION['sfwd-lms-tx'] = 'پرداخت با موفقیت تکمیل شد . شماره پیگیری  : '.$result["RefID"];
-					$sfwd_lms_tx = 'پرداخت با موفقیت تکمیل شد . شماره پیگیری  : '.$result["RefID"];
+                  if ($result["data"]["code"] == 100) {
+                    $this->zarinpal_learndash_payment_complete('ZarinPal',ltrim($_REQUEST['Authority'], 0),$result["data"]["ref_id"]);
+					$_SESSION['sfwd-lms-tx'] = 'پرداخت با موفقیت تکمیل شد . شماره پیگیری  : '.$result["data"]["ref_id"];
+					$sfwd_lms_tx = 'پرداخت با موفقیت تکمیل شد . شماره پیگیری  : '.$result["data"]["ref_id"];
                   }else{
-					$_SESSION['sfwd-lms-tx'] = 'خطا در تکمیل پرداخت  : '.$this->getZarinPalResponseStatus($result["Status"]);
-					$sfwd_lms_tx = 'خطا در تکمیل پرداخت  : '.$this->getZarinPalResponseStatus($result["Status"]);
+					$_SESSION['sfwd-lms-tx'] = 'خطا در تکمیل پرداخت  : '.$this->getZarinPalResponseStatus($result["data"]["code"]);
+					$sfwd_lms_tx = 'خطا در تکمیل پرداخت  : '.$this->getZarinPalResponseStatus($result["data"]["code"]);
 				  }
     	        }
 			  }
@@ -165,15 +165,17 @@ class LearnDash_Zarinpal_Legacy_Checkout_Integration {
 	{
 		switch($code)
 		{
-			case -1:  return 'اطلاعات ارسالی ناقص می باشد';
-			case -2:  return 'مرچنت معتبر نیست';
-			case -3:  return 'رقم پرداختی کمتر از حداقل قابل قبول می باشد';
-			case -4:  return 'مرچنت نامعتبر';
-			case -11: return 'پرداخت مورد نظر یافت نشد';
-			case -21: return 'عملیات مالی برای تراکنش مورد نظر یافت نشد';
-			case -22: return 'تراکنش ناموفق می باشد';
-			case -33: return 'رقم تراکنش با رقم پرداختی تطابق ندارد';
-			case -54: return 'درخواست مورد نظر ارشیو شده است';
+			case -9:  return 'اطلاعات ارسالی ناقص می باشد';
+			case -10:  return 'مرچنت یا آیپی نامعتبر';
+			case -11:  return 'مرچنت نامعتبر';
+			case -12: return 'تلاش بیش از حد در یک بازه زمانی کوتاه';
+			case -15: return 'ترمینال شما به حالت تعلیق در آمده با تیم پشتیبانی تماس بگیرید';
+			case -16: return 'سطح تاييد پذيرنده پايين تر از سطح نقره اي است';
+			case -34: return 'مبلغ از کل تراکنش بیشتر است';
+			case -50: return 'مبلغ پرداخت شده با مقدار مبلغ در وریفای متفاوت است';
+			case -51: return 'پرداخت ناموفق';
+			case -53: return 'اتوریتی برای این مرچنت کد نیست';
+			case -54: return 'اتوریتی نامعتبر است';
 			case 100: return 'تراکنش با موفقیت انجام شد';
 			case 101: return 'تراکنش قبلا با موفقیت انجام و تعیین وضعیت شده';
 			case 'NOK': return 'پرداخت از سوی کاربر لغو شد';
@@ -253,11 +255,11 @@ class LearnDash_Zarinpal_Legacy_Checkout_Integration {
     function SendRequest_ToZarinPal($action, $params){
        try {
           if($this->test_mode == '1'){
-             $ch = curl_init('https://sandbox.zarinpal.com/pg/rest/WebGate/' . $action . '.json');
+             $ch = curl_init('https://api.zarinpal.com/pg/v4/payment/' . $action . '.json');
           }else{
-             $ch = curl_init('https://www.zarinpal.com/pg/rest/WebGate/' . $action . '.json');
+             $ch = curl_init('https://api.zarinpal.com/pg/v4/payment/' . $action . '.json');
           }
-          curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v1');
+          curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v4');
           curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
           curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -337,9 +339,9 @@ class LearnDash_Zarinpal_Legacy_Checkout_Integration {
           //$ZPLUrl = add_query_arg(array('c'=>$course_id),get_home_url());
           
           if(is_numeric(strpos($course_price_copy,'ریال'))){
-	        $course_price = $course_price / 10;
-          }else if(is_numeric(strpos($course_price_copy,'تومان'))){
 	        $course_price = $course_price ;
+          }else if(is_numeric(strpos($course_price_copy,'تومان'))){
+	        $course_price = $course_price * 10 ;
           }else{
 	        $course_price = $course_price/10 ;
           }
@@ -351,30 +353,34 @@ class LearnDash_Zarinpal_Legacy_Checkout_Integration {
           
           $course_price = trim($course_price);
           //var_dump($course_price_copy);
-          $data = array('MerchantID' => $this->MerchantID, 'Amount' => intval($course_price), 'CallbackURL' => $ZPLUrl, 'Description' => 'test' , 'Email' =>'test@gmail.com');
+          $data = array('merchant_id' => $this->MerchantID, 'amount' => intval($course_price), 'callback_url' => $ZPLUrl, 'description' => 'پرداخت لرن دش با زرین پال' );
         
-          $result = $this->SendRequest_ToZarinPal('PaymentRequest', json_encode($data));
-          //var_dump($result);
+          $result = $this->SendRequest_ToZarinPal('request', json_encode($data));
+        //  var_dump($result);
     	  if ($result === false) {
-            $zarinpal_button .= '<div class="learndash_checkout_button learndash_stripe_button">
-	          <button class="learndash-stripe-checkout-button btn-join button"><i class="vc_btn3-icon fa fa-check-square-o"></i> خطا ('.getZarinPalResponseStatus($r->Status).') در پرداخت زرین پال</button>
-            </div>';
+            $zarinpal_button .= '
+<div class="learndash_checkout_button learndash_stripe_button">
+    <button class="learndash-stripe-checkout-button btn-join button"><i class="vc_btn3-icon fa fa-check-square-o"></i>
+        خطا در پرداخت زرین پال
+        '.$result['errors']['code'].'
+    </button>
+</div>';
           } else {
-            if ($result["Status"] == 100) {
+            if ($result["data"]["code"] == 100) {
               if($this->test_mode == true){
                 $zarinpal_button .= '<div class="learndash_checkout_button learndash_stripe_button">
-                <form action="https://sandbox.zarinpal.com/pg/StartPay/'.$result["Authority"].'" method="get" class="learndash-stripe-checkout">
+                <form action="https://sandbox.zarinpal.com/pg/StartPay/'.$result["data"]["authority"].'" method="get" class="learndash-stripe-checkout">
                    <button type="submit" class="learndash-stripe-checkout-button btn-join button">پرداخت با زرین پال</button>
                 </form></div>';
               }else{
                 if($this->zaringit == true){
                   $zarinpal_button .= '<div class="learndash_checkout_button learndash_stripe_button">
-                  <form action="https://www.zarinpal.com/pg/StartPay/'.$result["Authority"].'./ZarinGate" method="get" class="learndash-stripe-checkout">
+                  <form action="https://www.zarinpal.com/pg/StartPay/'.$result["data"]["authority"].'./ZarinGate" method="get" class="learndash-stripe-checkout">
                     <button type="submit" class="learndash-stripe-checkout-button btn-join button">پرداخت با زرین پال</button>
                   </form></div>';
                 }else if($this->zaringit == false){
                   $zarinpal_button .= '<div class="learndash_checkout_button learndash_stripe_button">
-                  <form action="https://www.zarinpal.com/pg/StartPay/'.$result["Authority"].'" method="get" class="learndash-stripe-checkout">
+                  <form action="https://www.zarinpal.com/pg/StartPay/'.$result["data"]["authority"].'" method="get" class="learndash-stripe-checkout">
                     <button type="submit" class="learndash-stripe-checkout-button btn-join button">پرداخت با زرین پال</button>
                   </form></div>';  
                 }
@@ -382,7 +388,8 @@ class LearnDash_Zarinpal_Legacy_Checkout_Integration {
             }else{
               $zarinpal_button .= '<div class="learndash_checkout_button learndash_stripe_button">
               <div class="learndash-stripe-checkout">
-	            <button class="learndash-stripe-checkout-button btn-join button"><i class="vc_btn3-icon fa fa-check-square-o"></i> خطا ('.getZarinPalResponseStatus($r->Status).') در پرداخت زرین پال</button>
+	            <button class="learndash-stripe-checkout-button btn-join button"><i class="vc_btn3-icon fa fa-check-square-o"></i> خطا در پرداخت زرین پال
+				'.$result['errors']['code'].'</button>
               </div></div>';
             }
           }
