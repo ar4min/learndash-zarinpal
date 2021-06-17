@@ -228,12 +228,12 @@ class LearnDash_Zarinpal_Settings {
 	public function get_zarinpal_settings() {
 		
 		$settings = array(
-			'test_mode' => array(
-				'name'  => __( 'Test Mode', 'learndash-zarinpal' ),
-				'desc'  => __( 'Check this box to enable test mode.', 'learndash-zarinpal' ),
-				'type'  => 'checkbox',
-				'value' => isset( $this->options['test_mode'] ) ? $this->options['test_mode'] : 0,
-			),
+			// 'test_mode' => array(
+			// 	'name'  => __( 'Test Mode', 'learndash-zarinpal' ),
+			// 	'desc'  => __( 'Check this box to enable test mode.', 'learndash-zarinpal' ),
+			// 	'type'  => 'checkbox',
+			// 	'value' => isset( $this->options['test_mode'] ) ? $this->options['test_mode'] : 0,
+			// ),
 			'MerchantID' => array(
 				'name' => __( 'MerchantID', 'learndash-zarinpal' ),
 				'desc' => __( 'MerchantID used on this site.', 'learndash-zarinpal' ),
@@ -246,12 +246,12 @@ class LearnDash_Zarinpal_Settings {
 				'type' => 'text',
 				'value' => isset( $this->options['return_url'] ) ? $this->options['return_url'] : '',
 			),
-			'zaringit' => array(
-				'name'  => __( 'zaringit', 'learndash-zarinpal' ),
-				'desc'  => __( 'Check this box to enable zaringit.', 'learndash-zarinpal' ),
-				'type'  => 'checkbox',
-				'value' => isset( $this->options['zaringit'] ) ? $this->options['zaringit'] : 0,
-			),
+			// 'zaringit' => array(
+			// 	'name'  => __( 'zaringit', 'learndash-zarinpal' ),
+			// 	'desc'  => __( 'Check this box to enable zaringit.', 'learndash-zarinpal' ),
+			// 	'type'  => 'checkbox',
+			// 	'value' => isset( $this->options['zaringit'] ) ? $this->options['zaringit'] : 0,
+			// ),
 			
 		);
         //return_url
